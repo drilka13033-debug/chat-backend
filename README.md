@@ -1,30 +1,30 @@
 # Mini Chat Backend
 
-Real-time chat service built with FastAPI, WebSocket, Redis pub/sub and PostgreSQL.
+Сервис обмена сообщениями в реальном времени на FastAPI, WebSocket, Redis pub/sub и PostgreSQL.
 
-## Features
+## Особенности
 
-- REST API for user and message management
-- WebSocket for real-time messaging
-- Redis pub/sub for scalable notifications
-- PostgreSQL for persistent data storage
-- Docker Compose for easy deployment
-- Comprehensive test coverage
+- REST API для управления пользователями и сообщениями
+- WebSocket для обмена сообщениями в реальном времени
+- Redis pub/sub для масштабируемых уведомлений
+- PostgreSQL для постоянного хранения данных
+- Docker Compose для удобного деплоя
+- Полное покрытие тестами
 
-## Tech Stack
+## Технологический стек
 
-- **FastAPI** - Modern Python web framework
-- **PostgreSQL** - Relational database
-- **Redis** - Caching and pub/sub messaging
-- **SQLAlchemy** - Database ORM
-- **Pydantic** - Data validation
-- **WebSocket** - Real-time communication
-- **Docker** - Containerization
-- **Pytest** - Testing framework
+- **FastAPI** — современный Python-веб-фреймворк
+- **PostgreSQL** — реляционная база данных
+- **Redis** — кеширование и pub/sub-уведомления
+- **SQLAlchemy** — ORM для работы с базой данных
+- **Pydantic** — валидация данных
+- **WebSocket** — обмен сообщениями в реальном времени
+- **Docker** — контейнеризация
+- **Pytest** — фреймворк для тестирования
 
-## Quick Start
+## Быстрый старт
 
-### Using Docker Compose
+### Через Docker Compose
 
 ```bash
 git clone <repository-url>
@@ -32,64 +32,64 @@ cd mini-chat-backend
 docker-compose up --build
 ```
 
-Service will be available at: http://localhost:8000
+Сервис будет доступен по адресу: http://localhost:8000
 
-### Development Setup
+### Для разработки
 
 ```bash
-# Start PostgreSQL and Redis
+# Запустить PostgreSQL и Redis
 docker-compose up postgres redis
 
-# Set environment variables
+# Установить переменные окружения
 export DATABASE_URL="postgresql://chat_user:chat_password@localhost:5432/chat_db"
 export REDIS_URL="redis://localhost:6379"
 
-# Install dependencies
+# Установить зависимости
 pip install -r requirements.txt
 
-# Run application
+# Запустить приложение
 uvicorn main:app --reload
 ```
 
-## API Documentation
+## Документация API
 
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
-## API Endpoints
+## Эндпоинты API
 
-### Users
-- `POST /users/` - Create user
-- `GET /users/` - List users
-- `GET /users/{user_id}` - Get user by ID
+### Пользователи
+- `POST /users/` — создать пользователя
+- `GET /users/` — получить список пользователей
+- `GET /users/{user_id}` — получить пользователя по ID
 
-### Messages
-- `POST /messages/` - Send message
-- `GET /messages/` - Get message history
-- `GET /messages/recent/{user_id}` - Get recent cached messages
+### Сообщения
+- `POST /messages/` — отправить сообщение
+- `GET /messages/` — получить историю сообщений
+- `GET /messages/recent/{user_id}` — получить последние сообщения из кеша
 
 ### WebSocket
-- `WS /ws/{user_id}` - Real-time chat connection
+- `WS /ws/{user_id}` — соединение для чата в реальном времени
 
-### System
-- `GET /health` - Health check
+### Система
+- `GET /health` — проверка работоспособности сервиса
 
-## Testing
+## Тестирование
 
 ```bash
-# Run all tests
+# Запуск всех тестов
 pytest
 
-# Run with verbose output
+# Запуск с подробным выводом
 pytest -v
 
-# Run specific test
+# Запуск конкретного теста
 pytest test_api.py::TestUsers::test_create_user
 ```
 
-## Usage Examples
+## Примеры использования
 
-### Create Users
+### Создание пользователя
 
 ```bash
 curl -X POST "http://localhost:8000/users/" \
@@ -97,28 +97,28 @@ curl -X POST "http://localhost:8000/users/" \
   -d '{"username": "alice", "display_name": "Alice Smith"}'
 ```
 
-### Send Message
+### Отправка сообщения
 
 ```bash
 curl -X POST "http://localhost:8000/messages/" \
   -H "Content-Type: application/json" \
-  -d '{"sender_id": 1, "receiver_id": 2, "content": "Hello!"}'
+  -d '{"sender_id": 1, "receiver_id": 2, "content": "Привет!"}'
 ```
 
-### WebSocket Connection
+### WebSocket-соединение
 
 ```javascript
 const ws = new WebSocket('ws://localhost:8000/ws/1');
 
 ws.onmessage = function(event) {
     const message = JSON.parse(event.data);
-    console.log('New message:', message);
+    console.log('Новое сообщение:', message);
 };
 
 ws.send(JSON.stringify({type: 'ping'}));
 ```
 
-## Architecture
+## Архитектура
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -130,13 +130,13 @@ ws.send(JSON.stringify({type: 'ping'}));
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
-## Environment Variables
+## Переменные окружения
 
 ```bash
 DATABASE_URL=postgresql://chat_user:chat_password@localhost:5432/chat_db
 REDIS_URL=redis://localhost:6379
 ```
 
-## License
+## Лицензия
 
 MIT License
